@@ -5,6 +5,7 @@ const {open}= require("sqlite");
 const sqlite3 = require("sqlite3");
 const path= require('path');
 const dbPath=path.join(__dirname,"Login.db");
+const jwt=require("jsonwebtoken");
 
 const cors= require("cors");
 const app= express();
@@ -54,7 +55,11 @@ app.post('/login',async(request,response)=>{
     if (data ===undefined){
         response.send('User not exit')
     }else{
-        response.send("Loged in Successfully")
+        const payload = {
+            username: username,
+          };
+          const jwtToken = jwt.sign(payload, "MY_SECRET_TOKEN");
+          response.send({ jwtToken });
     }
 
 })
