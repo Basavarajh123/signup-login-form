@@ -46,8 +46,8 @@ app.get('/users',async(request,response)=>{
 
 
 app.post('/login',async(request,response)=>{
-    const {email,password}= request.body;
-    const sqlQuery= `SELECT * FROM user WHERE email ="${email}" and password="${password}"`
+    const {username,password}= request.body;
+    const sqlQuery= `SELECT * FROM user WHERE email ="${username}" and password="${password}"`
 
     const data= await database.get(sqlQuery)
 
